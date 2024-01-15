@@ -17,20 +17,34 @@ class QuestionViewModel: ObservableObject {
     private let apiKey = "Bearer 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"
     
     func fetchQuestionsFromLLM() {
+        let responsesString = userResponses.joined(separator: " ")
+        let inputPrompt: String
+        if currentQuestionIndex == 0 {
+            inputPrompt = "Ask me about my day as if I am your best friend and we are two gossip girls talking to each other at the end of the day"
+        } else {
+            inputPrompt = "Act like you are my best friend, ask a follow up question as if you are interested to know more considering: \(responsesString)"
+        }
+        
         let payload: [String: Any] = [
-            "inputs": "Ask me about my day as if I am your best friend"
+            "inputs": inputPrompt
         ]
+        
         makeAPIRequest(with: payload) { [weak self] response in
-            self?.questions = response.compactMap { $0 as? String }
-            self?.currentQuestionIndex = 0
-            self?.hasCompletedQuestions = self?.questions.isEmpty ?? true
+            guard let self = self else { return }
+            if let newQuestion = response.first as? String {
+                if self.currentQuestionIndex < self.questions.count {
+                    self.questions[self.currentQuestionIndex] = newQuestion
+                } else {
+                    self.questions.append(newQuestion)
+                }
+            }
         }
     }
     
     func generatePersonalizedGuidance() {
         let responsesString = userResponses.joined(separator: " ")
         let payload: [String: Any] = [
-            "inputs": "Act like a supportive friend of mine, ask a follow up question considering:  \(responsesString)"
+            "inputs": "Act like a supportive friend of mine, ask a follow up question considering: \(responsesString)"
         ]
         makeAPIRequest(with: payload) { [weak self] response in
             self?.personalizedGuidance = response.first as? String ?? ""
@@ -66,18 +80,19 @@ class QuestionViewModel: ObservableObject {
                     }
                 } else {
                     let responseString = String(data: data, encoding: .utf8) ?? "Could not stringify data"
-                    print("Invalid response format: (responseString)")
+                    print("Invalid response format: \(responseString)")
                 }
             } catch {
-                print("JSON parsing error: (error.localizedDescription)")
+                print("JSON parsing error: \(error.localizedDescription)")
             }
         }.resume()
     }
     
     func submitResponse(_ response: String) {
         userResponses.append(response)
-        if currentQuestionIndex < questions.count - 1 {
+        if currentQuestionIndex < 4 {
             currentQuestionIndex += 1
+            fetchQuestionsFromLLM()
         } else {
             hasCompletedQuestions = true
             generatePersonalizedGuidance()
@@ -91,7 +106,4 @@ class QuestionViewModel: ObservableObject {
         personalizedGuidance = ""
         fetchQuestionsFromLLM()
     }
-    
 }
-
-
