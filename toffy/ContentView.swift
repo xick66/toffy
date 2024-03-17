@@ -12,8 +12,7 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             HomeView(viewModel: viewModel)
-                .environmentObject(viewModel) // Pass the viewModel as an environment object
-        }
+                .environmentObject(viewModel) 
     }
 }
 
