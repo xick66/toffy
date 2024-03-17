@@ -1,5 +1,5 @@
 //
-//sk-eeevtua-ykkuiqi-vh4zdwa-uymnv7i  - helicone api key
+//  - helicone api key
 //
 //  QuestionviewModel.swift
 //  toffy
@@ -8,9 +8,9 @@
 //
 
 //    private let apiURL = "https://api-inference.huggingface.co/models/MBZUAI/LaMini-Flan-T5-248M"
-//    private let apiKey = "Bearer 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"
+//    private let apiKey = "Bearer APIKEY"
 
-//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
+//
 //https://api.openai.com/v1/chat/completions
 
 
@@ -24,10 +24,9 @@ class QuestionViewModel: ObservableObject {
     @Published var personalizedGuidance: String = ""
 
     private let apiURL = "https://oai.hconeai.com/v1/chat/completions" // Helicone API URL
-    private let apiKey = "Bearer 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" // Replace with your actual OpenAI API key
-    private let heliconeAPIKey = "Bearer sk-eeevtua-ykkuiqi-vh4zdwa-uymnv7i" // Replace with your actual Helicone API key
-    private let model = "gpt-3.5-turbo-1106" // Replace with the actual GPT model identifier
-
+    private let apiKey = "Bearer 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" 
+    private let heliconeAPIKey = "Bearer sk-eeevtua-ykkuiqi-vh4zdwa-uymnv7i" 
+    private let model = "gpt-3.5-turbo-1106" 
     func fetchQuestionsFromLLM() {
         if currentQuestionIndex >= 5 {
             hasCompletedQuestions = true
