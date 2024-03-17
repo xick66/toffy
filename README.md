@@ -6,3 +6,7 @@ Used Helicone ai proxy to receive and store user prompts and system responses, t
 
 
 <img width= "377" alt="Simulator Screenshot - iPhone 15 Pro - 2024-01-28 at 02 54 54" src = "https://github.com/xick66/toffy/assets/126589920/824ca559-6880-42be-be15-a14504aa5195">
+
+
+Here's the working demo:
+https://www.loom.com/share/cd060870b8c24fc5b88c9288533536ca?sid=8894817c-53af-4478-8629-7725a5011780
