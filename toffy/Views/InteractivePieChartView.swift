@@ -21,8 +21,7 @@ struct InteractivePieChartView: View {
             }
 
             if let index = selectedSliceIndex, slices.indices.contains(index) {
-                // This is a placeholder for the pop-up view
-                // Customize it according to your design
+               
                 VStack {
                     Text("Mood: \(sentimentDescription(index))")
                     Text("Percentage: \(formattedPercentage(slices[index].value))%")
@@ -36,8 +35,7 @@ struct InteractivePieChartView: View {
     }
 
     private func sentimentDescription(_ index: Int) -> String {
-        // Map index to sentiment description
-        // Customize this as per your sentiment mapping
+        
         ["Very Happy", "Happy", "Neutral", "Unhappy", "Very Unhappy"][index]
     }
 
@@ -67,14 +65,14 @@ struct PieSliceView: View {
     }
 }
 
-// Rest of your code remains the same
+
 
 
 struct PieSliceData {
     var startAngle: Angle
     var endAngle: Angle
     var color: Color
-    var value: Double // Add this line to represent the value of the slice
+    var value: Double 
 }
 
 
