@@ -13,7 +13,7 @@ struct HomeView: View {
     var body: some View {
         ZStack {
             if viewModel.hasCompletedQuestions {
-                // Show some completion view or the personalized guidance
+                
                 Text(viewModel.personalizedGuidance)
             } else {
                 QuestionView().environmentObject(viewModel)
