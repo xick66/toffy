@@ -18,7 +18,7 @@ struct MoodPieChartView: View {
                 .padding()
 
             PieChartView(slices: createPieSlices(), selectedSlice: $selectedSlice)
-                .frame(height: 300) // Adjust frame size as required
+                .frame(height: 300)
 
             if let selectedSlice = selectedSlice {
                 Text("Sentiment \(selectedSlice) is \(percentage(for: selectedSlice))% of your week")
@@ -28,11 +28,11 @@ struct MoodPieChartView: View {
     }
 
     private func createPieSlices() -> [PieSliceData] {
-        // ... existing logic to create slices ...
+       //Complete this soon
     }
 
     private func colorForSentiment(_ sentiment: Int) -> Color {
-        // ... existing logic to assign color ...
+        // Complete this soon
     }
 
     private func percentage(for sentiment: Int) -> Double {
@@ -51,7 +51,7 @@ struct PieChartView: View {
                 ForEach(slices.indices, id: \.self) { index in
                     PieSliceView(pieSliceData: self.slices[index])
                         .onTapGesture {
-                            self.selectedSlice = index + 1 // Assuming sentiments are 1-indexed
+                            self.selectedSlice = index + 1
                         }
                 }
             }
